@@ -26,9 +26,7 @@ const Picture = () => {
       <div>
         <h3 className="picture_title">Picture</h3>
       </div>
-      <div>
-        <img src={image} alt="image" />
-      </div>
+
       <div>
         <button
           className="button"
@@ -37,7 +35,7 @@ const Picture = () => {
             changeImage();
           }}
         >
-          {canChange ? "Stop" : "Go!"}{" "}
+         <img src={image} alt="image" />
         </button>
       </div>
     </div>
