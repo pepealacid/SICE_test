@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./Picture.css";
 
 const Picture = () => {
   const [image, setImage] = useState("https://picsum.photos/200");
@@ -6,33 +7,39 @@ const Picture = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      clearImage();
       changeImage();
-      clearInterval(interval);
     }, 4000);
 
     return () => clearInterval(interval);
-  }, []);
-
-  const clearImage = () => {
-    setImage(null);
-  };
+  }, [image, canChange]);
 
   const changeImage = () => {
-    setImage("https://picsum.photos/200");
+    if (canChange) {
+      fetch("https://picsum.photos/200").then((response)=>{
+        setImage(response.url)
+      })
+    }
   };
 
   return (
-    <div>
-      <h3>Picture</h3>
-      <img src={image} alt="image" />
-      <button
-        onClick={() => {
-          setCanChange(!canChange);
-        }}
-      >
-        {canChange ? "Stop" : "Go!"}{" "}
-      </button>
+    <div className="picture">
+      <div>
+        <h3 className="picture_title">Picture</h3>
+      </div>
+      <div>
+        <img src={image} alt="image" />
+      </div>
+      <div>
+        <button
+          className="button"
+          onClick={() => {
+            setCanChange(!canChange);
+            changeImage();
+          }}
+        >
+          {canChange ? "Stop" : "Go!"}{" "}
+        </button>
+      </div>
     </div>
   );
 };

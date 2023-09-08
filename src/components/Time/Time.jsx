@@ -25,7 +25,7 @@ const Time = () => {
     <div className="time">
       <h3>Time</h3>
       <p>{day} - {month} - {year}</p>
-      <p>{hours}:{minutes}:{seconds}</p>
+      <p className="clock">{hours}:{minutes}:{seconds}</p>
     </div>
   );
 };
